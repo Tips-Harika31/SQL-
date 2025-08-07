@@ -22,6 +22,26 @@ DENSE_RANK() assigns a ranking to each score based on descending order.
 Ties get the same rank, but next rank is not skipped (unlike RANK()).
 The ORDER BY score DESC ensures higher scores get lower rank numbers (e.g., 1 is the highest). 
 
+https://leetcode.com/problems/daily-leads-and-partners/
+select date_id, make_name, count(distinct lead_id) as unique_leads, count(distinct partner_id) as unique_partners from dailysales group by date_id, make_name;  
+Groups the rows by date_id and make_name.
+Within each group:
+COUNT(DISTINCT lead_id) computes how many unique leads appear.
+COUNT(DISTINCT partner_id) computes how many unique partners appear.
+Returns one row per (date_id, make_name) pair with the distinct counts.
+
+https://leetcode.com/problems/customer-placing-the-largest-number-of-orders/
+
+select customer_number 
+from orders 
+group by customer_number
+having count(order_number)= 
+(select count(order_number) cnt 
+from orders group by customer_number
+order by cnt desc limit 1); 
+
+
+
 
 
 
